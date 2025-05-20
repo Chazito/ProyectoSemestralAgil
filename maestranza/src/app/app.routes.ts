@@ -19,10 +19,17 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
   },  {
+<<<<<<< HEAD
     path: 'editar-productos',
     loadComponent: () => import('./pages/editar-productos/editar-productos.page').then( m => m.EditarProductosPage)
   },
 
 
 
+=======
+    path: 'usuario-list',
+    loadComponent: () => import('./pages/usuario-list/usuario-list.page').then( m => m.UsuarioListPage)
+  }
+
+>>>>>>> dcc27b68a90febeb1626ad191969a13317cf01cd
 ];
