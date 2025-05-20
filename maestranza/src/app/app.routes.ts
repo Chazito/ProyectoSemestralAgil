@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'listar-productos',
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
@@ -15,5 +15,10 @@ export const routes: Routes = [
     path: 'listar-productos',
     loadComponent: () => import('./pages/listar-productos/listar-productos.page').then( m => m.ListarProductosPage)
   },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
+  },
+
 
 ];
