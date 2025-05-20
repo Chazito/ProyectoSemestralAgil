@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>listar-productos</ion-title>
+    <ion-title>Listar Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,14 +11,53 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">ID del producto</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre del producto</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Stock</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <div>
     <ion-button>
-    Agregar producto
+      Agregar producto
     </ion-button>
     <ion-button>
-    Eliminar producto
+      Editar producto
     </ion-button>
-    <ion-button>
-    Editar producto
+  </div>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">ID del producto</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre del producto</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    </ion-list>
+
+  <div>
+    <ion-button color="danger">
+      Eliminar producto
     </ion-button>
+  </div>
 
 </ion-content>
