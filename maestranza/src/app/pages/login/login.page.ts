@@ -71,7 +71,13 @@ export class LoginPage implements OnInit {
   
   //funcion que valida los datos y muestra las alertas
   Ingresar(){
+    // Verificar si los campos están vacíos
+    if (!this.objetoLogin.correo.trim() || !this.objetoLogin.contrasena.trim()) {
+      this.alertaIni('Por favor complete todos los campos');
+      return;
+    }
     
+    // Verificar las credenciales
     if (this.objetoLogin.correo === this.Elogistica.correo && this.objetoLogin.contrasena === this.Elogistica.contrasena) {
       this.alertaIni('Usuario: Encargado de logistica');
       this.limpiarFormulario();
