@@ -6,6 +6,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonCard, IonCar
 import { Router } from '@angular/router';
 import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,7 @@ export class LoginPage implements OnInit {
   // Variable para controlar la visibilidad de la contraseña
   showPassword = false;
   
-  constructor(private router: Router, private alertController: AlertController) {
+  constructor(private router: Router, private alertController: AlertController, private fireService : FirebaseServiceService) {
     // Registramos los iconos que vamos a usar
     addIcons({
       'eye-outline': eyeOutline,
@@ -41,17 +42,6 @@ export class LoginPage implements OnInit {
     contrasena: ''
   };
 
-  // estos son los que añadi por defecto mientras no ocupemos bd, pero una vez lo ocupemos el formulario servira igual
-  Elogistica = {
-    correo: 'elogistica@gmail.com',
-    contrasena: 'Elogistica123.'
-  };
-
-  Ginventario = {
-    correo: 'ginventario@gmail.com',
-    contrasena: 'Ginventario123.'
-  };
-
   //limpiara el formulario
   async limpiarFormulario() {
     this.objetoLogin.correo = '';
@@ -70,7 +60,7 @@ export class LoginPage implements OnInit {
 
   
   //funcion que valida los datos y muestra las alertas
-  Ingresar(){
+  async Ingresar(){
     // Verificar si los campos están vacíos
     if (!this.objetoLogin.correo.trim() || !this.objetoLogin.contrasena.trim()) {
       this.alertaIni('Por favor complete todos los campos');
@@ -78,15 +68,10 @@ export class LoginPage implements OnInit {
     }
     
     // Verificar las credenciales
-    if (this.objetoLogin.correo === this.Elogistica.correo && this.objetoLogin.contrasena === this.Elogistica.contrasena) {
-      this.alertaIni('Usuario: Encargado de logistica');
+    if (await this.fireService.datosValidos(this.objetoLogin.correo, this.objetoLogin.contrasena)) {
+      this.alertaIni('Login correcto');
       this.limpiarFormulario();
-      this.router.navigate(['/listar-productos']);
-    }
-    else if (this.objetoLogin.correo === this.Ginventario.correo && this.objetoLogin.contrasena === this.Ginventario.contrasena) {
-      this.alertaIni('Usuario: Gestor de inventario');
-      this.limpiarFormulario();
-      this.router.navigate(['/listar-productos']);
+      this.router.navigate(['/vista-inventario']);
     }
     else {
       this.limpiarFormulario();

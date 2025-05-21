@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, updateDoc } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -15,6 +15,18 @@ export class FirebaseServiceService {
   getUsuarios() : Observable<any[]>{
     const userCollection = collection(this.firestore, this.collectionUsuarios);
     return collectionData(userCollection, {idField: "id"});
+  }
+
+  async datosValidos(email : string, password : string) : Promise<boolean>{
+    const usuario = doc(this.firestore, `${this.collectionUsuarios}/${email}`);
+    const docSnap = await getDoc(usuario);
+    if(!docSnap.exists()){
+      console.log("User doesn't exists")
+      return false;
+    }
+
+    const data = docSnap.data();
+    return data['contrasena'] == password;
   }
 
   async agregarProducto(data : Producto) : Promise<void>{
@@ -48,6 +60,8 @@ export interface Usuario{
   nombre : string;
   apellido : string;
   email : string;
+  contrasena : string;
+  rol : number;
 }
 
 export interface Producto{
