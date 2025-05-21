@@ -2,45 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonButton, IonIcon, IonButtons, IonRow, IonCol, IonCard, IonCardContent } from '@ionic/angular/standalone';
+import { FirebaseServiceService, Producto } from '../services/firebase-service.service';
+import {AlertController} from '@ionic/angular';
+import { logOutOutline, addCircleOutline, trashOutline, create, createOutline, closeCircleOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vista-inventario',
   templateUrl: './vista-inventario.page.html',
   styleUrls: ['./vista-inventario.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCard, IonCol, IonRow, IonButtons, IonIcon, IonButton, IonGrid, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonCardContent, IonCard, IonButtons, IonIcon, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class VistaInventarioPage implements OnInit {
   filtroTexto: string = '';
 
-  productos = [
-    {
-      id: 1212,
-      nombre: 'Taladro percutor',
-      precio: 88990,
-      stock: 3
-    },
-    {
-      id: 1256,
-      nombre: 'Set brocas',
-      precio: 9990,
-      stock: 10
-    },
-    {
-      id: 4345,
-      nombre: 'Martillo',
-      precio: 6350,
-      stock: 15
-    },
-    {
-      id: 1345,
-      nombre: 'Cemento Polpaico',
-      precio: 4950,
-      stock: 9
-    }
-  ];
+  productos : Producto[] = [];
 
-  constructor() {}
+  constructor(private fireService : FirebaseServiceService, private alertController : AlertController, private router : Router) {
+    addIcons({createOutline,closeCircleOutline,addCircleOutline,trashOutline,create,logOutOutline});
+    this.fireService.getProductos().subscribe(
+      data =>{
+        this.productos = data;
+      }
+    );
+  }
 
   ngOnInit() {}
 
@@ -49,8 +36,33 @@ export class VistaInventarioPage implements OnInit {
     // Aquí podrías redirigir a otra página o abrir un modal
   }
 
+  async confirmarEliminar(producto: any) {
+    const alert = await this.alertController.create({
+      header: '¿Eliminar producto?',
+      message: `¿Estás seguro que quieres eliminar <strong>${producto.nombre}</strong>?`,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: () => this.eliminar(producto),
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
   eliminar(producto: any) {
     console.log('Eliminar producto', producto);
+    this.fireService.deleteProducto(producto.id);
     // Aquí podrías mostrar una alerta de confirmación y eliminar el producto del array
+  }
+
+  agregarProducto(){
+    this.router.navigate(['/listar-productos'])
   }
 }  

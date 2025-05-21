@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonItem, IonLabel } from '@ionic/angular/standalone';
-import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
+import { FirebaseServiceService, Usuario } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-usuario-list',
@@ -28,8 +28,4 @@ export class UsuarioListPage implements OnInit {
   }
 
 }
-export interface Usuario{
-  nombre : string;
-  apellido : string;
-  email : string;
-}
+
