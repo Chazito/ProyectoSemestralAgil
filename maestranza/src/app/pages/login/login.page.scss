@@ -1,0 +1,125 @@
+ion-content {
+    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c2b3a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 0;
+  }
+  
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  ion-card {
+    background: #0d0d0d;
+    color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    width: 90vw;
+    max-width: 100%;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  ion-card-title {
+    color: #f2c300;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  ion-card-subtitle {
+    color: #ccc;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Contenedor para los dos inputs con separación */
+  ion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  /* Ion-item en blanco para inputs */
+  ion-item {
+    --background: transparent;
+    --highlight-color-focused: #f2c300;
+    border: none;
+    margin: 0;
+    padding: 0 12px;
+    font-weight: bold;
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: white;
+    color: black;
+  }
+  
+  /* Línea vertical para separar los dos inputs */
+  ion-item:first-child {
+    border-bottom: 2px solid #333333; /* línea gris oscura */
+  }
+  
+  /* Etiquetas en negro */
+  ion-label {
+    color: black !important;
+    font-weight: 600;
+  }
+  
+  /* Texto ingresado en negro */
+  ion-input {
+    color: black !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Iconos en gris */
+  ion-icon {
+    color: #555555;
+  }
+  
+  /* Botones sin borde, fondo amarillo plano */
+  ion-button {
+    --background: #f2c300;
+    --color: black;
+    font-weight: bold;
+    margin-top: 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 12px 0;
+    box-shadow: none !important;
+    border: none !important;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #d1a500;
+      box-shadow: none !important;
+      transform: scale(1.03);
+    }
+  }
+  

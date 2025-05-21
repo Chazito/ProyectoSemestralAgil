@@ -1,0 +1,56 @@
+:host {
+    display: block;
+    height: 100vh;
+    background-color: #000000;
+  }
+  
+  /* Fondo del contenido */
+  ion-content {
+    --background: #000000 !important;
+    background-color: #000000 !important;
+    color: #ffffff;
+  }
+  
+  /* Título principal */
+  ion-title {
+    color: #e0c200;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  /* Lista de usuarios */
+  ion-list {
+    padding: 16px;
+  }
+  
+  /* Estilo de cada item */
+  ion-item {
+    --background: #1e1e1e;
+    color: #ffffff;
+    border: 2px solid #ffea00;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  /* Efecto al pasar el mouse por encima */
+  ion-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px #ffea00;
+  }
+  
+  /* Nombre del usuario */
+  ion-label h2 {
+    color: #ffea00;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  /* Correo del usuario */
+  ion-label p {
+    color: #cccccc;
+    font-size: 14px;
+  }
+  
