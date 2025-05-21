@@ -26,6 +26,10 @@ export const routes: Routes = [
   {
     path: 'usuario-list',
     loadComponent: () => import('./pages/usuario-list/usuario-list.page').then( m => m.UsuarioListPage)
+  },  {
+    path: 'vista-inventario',
+    loadComponent: () => import('./vista-inventario/vista-inventario.page').then( m => m.VistaInventarioPage)
   },
+
 
 ];

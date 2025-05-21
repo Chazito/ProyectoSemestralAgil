@@ -1,0 +1,31 @@
+<ion-card>
+  <ion-card-content>
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{ producto.id }}</td>
+          <td>{{ producto.nombre }}</td>
+          <td>{{ producto.precio | currency:'CLP':'symbol':'1.0-0' }}</td>
+          <td>{{ producto.stock }}</td>
+            <td>
+              <ion-button fill="clear" size="small" color="primary" (click)="editar(producto)">
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" size="small" color="danger" (click)="eliminar(producto)">
+                <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </ion-card-content>
+</ion-card>

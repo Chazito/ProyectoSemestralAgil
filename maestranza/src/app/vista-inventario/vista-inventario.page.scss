@@ -1,0 +1,21 @@
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  th {
+    background: #000;
+    color: white;
+  }
+
+  ion-icon {
+    font-size: 20px;
+    margin: 0 6px;
+    cursor: pointer;
+  }
+}
