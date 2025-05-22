@@ -10,32 +10,32 @@
   
   <ion-list class="datos-editar">
   <ion-item>
-    <ion-label position="floating">ID del producto</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label position="floating">Codigo de Barra</ion-label>
+    <ion-input [(ngModel)]="codigo_barra" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Nombre del producto</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-input [(ngModel)]="nombre" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Precio</ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-label position="floating">Descripcion</ion-label>
+    <ion-input [(ngModel)]="descripcion" type="text"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Stock</ion-label>
-    <ion-input type="number"></ion-input>
+    <ion-label position="floating">Ultimo Precio</ion-label>
+    <ion-input [(ngModel)]="ultimo_precio" type="number"></ion-input>
   </ion-item>
 </ion-list>
 
   <div class="botones-cancelar-editar">
-    <ion-button>
-    Cancelar
+    <ion-button color="medium" (click)="cancelar()">
+      Cancelar
     </ion-button>
-    <ion-button>
-    Editar
+    <ion-button color="primary" (click)="editarProducto()">
+      Editar
     </ion-button>
   </div>
 

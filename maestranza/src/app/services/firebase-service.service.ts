@@ -16,6 +16,11 @@ export class FirebaseServiceService {
     const userCollection = collection(this.firestore, this.collectionUsuarios);
     return collectionData(userCollection, {idField: "id"});
   }
+  
+  getUsuarioByEmail(email : string) : Observable<any>{
+    const usuario = doc(this.firestore, `${this.collectionUsuarios}/${email}`);
+    return docData(usuario, {idField:'id'});
+  }
 
   async datosValidos(email : string, password : string) : Promise<boolean>{
     const usuario = doc(this.firestore, `${this.collectionUsuarios}/${email}`);

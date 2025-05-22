@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginPage implements OnInit {
   // Variable para controlar la visibilidad de la contraseña
   showPassword = false;
   
-  constructor(private router: Router, private alertController: AlertController, private fireService : FirebaseServiceService) {
+  constructor(private router: Router, private alertController: AlertController, private fireService : FirebaseServiceService, private userService: UserService) {
     // Registramos los iconos que vamos a usar
     addIcons({
       'eye-outline': eyeOutline,
@@ -69,6 +70,7 @@ export class LoginPage implements OnInit {
     
     // Verificar las credenciales
     if (await this.fireService.datosValidos(this.objetoLogin.correo, this.objetoLogin.contrasena)) {
+      await this.userService.setUser(this.objetoLogin.correo);
       this.alertaIni('Login correcto');
       this.limpiarFormulario();
       this.router.navigate(['/vista-inventario']);

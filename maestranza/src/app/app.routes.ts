@@ -20,13 +20,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/login/login.page').then( m => m.LoginPage)
   },
   {
-    path: 'editar-productos',
+    path: 'editar-productos/:id',
     loadComponent: () => import('./pages/editar-productos/editar-productos.page').then( m => m.EditarProductosPage)
   },
   {
     path: 'usuario-list',
     loadComponent: () => import('./pages/usuario-list/usuario-list.page').then( m => m.UsuarioListPage)
-  },  {
+  },
+  {
     path: 'vista-inventario',
     loadComponent: () => import('./vista-inventario/vista-inventario.page').then( m => m.VistaInventarioPage)
   },

@@ -32,7 +32,8 @@ export class VistaInventarioPage implements OnInit {
   ngOnInit() {}
 
   editar(producto: any) {
-    console.log('Editar producto', producto);
+    console.log('Editar producto', producto.id);
+    this.router.navigate(['/editar-productos', producto.id]);
     // Aquí podrías redirigir a otra página o abrir un modal
   }
 
