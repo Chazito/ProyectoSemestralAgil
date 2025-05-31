@@ -1,13 +1,47 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>editar-proveedores</ion-title>
+    <ion-title class="titulo-editar-proveedores">
+      Editar Proveedores
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">editar-proveedores</ion-title>
-    </ion-toolbar>
-  </ion-header>
+   <ion-list>
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Rut de la empresa</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre del proveedor</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Correo del proveedor</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Numero de contacto</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Dirección del proveedor</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+</ion-list>
+
+  <div class="botones-cancelar-editar">
+    <ion-button color="medium" (click)="cancelar()">
+      Cancelar
+    </ion-button>
+    <ion-button color="primary">
+      Editar
+    </ion-button>
+  </div>
+
 </ion-content>
