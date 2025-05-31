@@ -30,7 +30,19 @@ export const routes: Routes = [
   {
     path: 'vista-inventario',
     loadComponent: () => import('./vista-inventario/vista-inventario.page').then( m => m.VistaInventarioPage)
+  },  {
+    path: 'agregar-proveedores',
+    loadComponent: () => import('./pages/agregar-proveedores/agregar-proveedores.page').then( m => m.AgregarProveedoresPage)
   },
+  {
+    path: 'listar-proveedores',
+    loadComponent: () => import('./pages/listar-proveedores/listar-proveedores.page').then( m => m.ListarProveedoresPage)
+  },
+  {
+    path: 'editar-proveedores',
+    loadComponent: () => import('./pages/editar-proveedores/editar-proveedores.page').then( m => m.EditarProveedoresPage)
+  },
+
 
 
 ];
