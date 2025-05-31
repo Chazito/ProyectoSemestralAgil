@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonButton, IonIcon, IonButtons, IonRow, IonCol, IonCard, IonCardContent } from '@ionic/angular/standalone';
 import { FirebaseServiceService, Producto } from '../services/firebase-service.service';
-import {AlertController} from '@ionic/angular';
+import { AlertController} from '@ionic/angular';
 import { logOutOutline, addCircleOutline, trashOutline, create, createOutline, closeCircleOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
@@ -66,4 +66,6 @@ export class VistaInventarioPage implements OnInit {
   agregarProducto(){
     this.router.navigate(['/listar-productos'])
   }
+
+
 }  

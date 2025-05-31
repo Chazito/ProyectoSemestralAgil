@@ -19,7 +19,7 @@ export class EditarProveedoresPage implements OnInit {
   }
 
   cancelar() {
-    this.router.navigate(['/vista-inventario']);
+    this.router.navigate(['/listar-proveedores']);
   }
 
 }
