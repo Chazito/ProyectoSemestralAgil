@@ -11,22 +11,22 @@
   <ion-list class="datos-agregar">
     <ion-item>
       <ion-label position="floating">Nombre del producto</ion-label>
-      <ion-input type="text" [(ngModel)]="nombre"></ion-input>
+      <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Descripción</ion-label>
-      <ion-input type="text" [(ngModel)]="descripcion"></ion-input>
+      <ion-input type="text" required [(ngModel)]="descripcion"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Precio</ion-label>
-      <ion-input type="number" [(ngModel)]="ultimo_precio"></ion-input>
+      <ion-input type="number" required [(ngModel)]="ultimo_precio"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Codigo de Barra</ion-label>
-      <ion-input type="number" [(ngModel)]="codigo_barra"></ion-input>
+      <ion-input type="number" required [(ngModel)]="codigo_barra"></ion-input>
     </ion-item>
   </ion-list>
 
