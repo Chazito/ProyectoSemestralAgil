@@ -7,34 +7,32 @@
 <ion-content [fullscreen]="true">
   
  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Rut de la empresa</ion-label>
-      <ion-input type="number" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Nombre del proveedor</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
+  <ion-item>
+    <ion-label position="floating">Rut de la empresa</ion-label>
+    <ion-input type="text" required [(ngModel)]="rut"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Nombre del proveedor</ion-label>
+    <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Correo del proveedor</ion-label>
+    <ion-input type="email" required [(ngModel)]="correo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Numero de contacto</ion-label>
+    <ion-input type="number" required [(ngModel)]="telefono"></ion-input>
+  </ion-item>
+</ion-list>
 
-    <ion-item>
-      <ion-label position="floating">Correo del proveedor</ion-label>
-      <ion-input type="email" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Numero de contacto</ion-label>
-      <ion-input type="number" required></ion-input>
-    </ion-item>
-    </ion-list>
-
-    <ion-item>
-      <ion-label position="floating">Dirección del proveedor</ion-label>
-      <ion-input type="text" required></ion-input>
-    </ion-item>
+<ion-item>
+  <ion-label position="floating">Dirección del proveedor</ion-label>
+  <ion-input type="text" required [(ngModel)]="direccion"></ion-input>
+</ion-item>
 
    <div>
     <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button color="primary">Agregar</ion-button>
+    <ion-button color="primary" (click)="limpiarFormulario()">Agregar</ion-button>
   </div>
 
 </ion-content>

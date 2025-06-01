@@ -13,13 +13,29 @@ import { Router } from '@angular/router';
 })
 export class AgregarProveedoresPage implements OnInit {
 
+  // Variables enlazadas al formulario
+  rut: string = '';
+  nombre: string = '';
+  correo: string = '';
+  telefono: string = '';
+  direccion: string = '';
+
   constructor(private router : Router) { }
 
   ngOnInit() {
   }
 
   cancelar() {
-    this.router.navigate(['/home']); // cambia según donde quieras volver
+    this.limpiarFormulario();
+    this.router.navigate(['/listar-proveedores']); // cambia según donde quieras volver
+  }
+
+  limpiarFormulario() {
+    this.rut = '';
+    this.nombre = '';
+    this.correo = '';
+    this.telefono = '';
+    this.direccion = '';
   }
 
 }
