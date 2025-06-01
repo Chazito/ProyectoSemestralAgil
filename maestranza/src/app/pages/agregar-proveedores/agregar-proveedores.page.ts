@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
   templateUrl: './agregar-proveedores.page.html',
   styleUrls: ['./agregar-proveedores.page.scss'],
   standalone: true,
-  imports: [IonItem, IonList, IonLabel, IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonItem, IonList, IonLabel, IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, IonSelect, 
+    IonSelectOption, CommonModule, FormsModule]
 })
 export class AgregarProveedoresPage implements OnInit {
 
@@ -19,6 +20,7 @@ export class AgregarProveedoresPage implements OnInit {
   correo: string = '';
   telefono: string = '';
   direccion: string = '';
+  terminosPago: string = '';
 
   constructor(private router : Router) { }
 
@@ -36,6 +38,7 @@ export class AgregarProveedoresPage implements OnInit {
     this.correo = '';
     this.telefono = '';
     this.direccion = '';
+    this.terminosPago = '';
   }
 
 }

@@ -5,34 +5,51 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
  <ion-list>
   <ion-item>
     <ion-label position="floating">Rut de la empresa</ion-label>
     <ion-input type="text" required [(ngModel)]="rut"></ion-input>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Nombre del proveedor</ion-label>
     <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
   </ion-item>
+
   <ion-item>
     <ion-label position="floating">Correo del proveedor</ion-label>
     <ion-input type="email" required [(ngModel)]="correo"></ion-input>
   </ion-item>
+
   <ion-item>
-    <ion-label position="floating">Numero de contacto</ion-label>
+    <ion-label position="floating">Número de contacto</ion-label>
     <ion-input type="number" required [(ngModel)]="telefono"></ion-input>
   </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Dirección del proveedor</ion-label>
+    <ion-input type="text" required [(ngModel)]="direccion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+  <ion-label position="floating">Términos de pago</ion-label>
+  <ion-select
+    required
+    [(ngModel)]="terminosPago"
+    cancelText="Cerrar"
+    okText="Ok"
+  >
+    <ion-select-option value="Contado">Contado</ion-select-option>
+    <ion-select-option value="Net 15">15 días netos</ion-select-option>
+    <ion-select-option value="Net 30">30 días netos</ion-select-option>
+    <ion-select-option value="Pago contra entrega">Pago contra entrega</ion-select-option>
+  </ion-select>
+</ion-item>
 </ion-list>
 
-<ion-item>
-  <ion-label position="floating">Dirección del proveedor</ion-label>
-  <ion-input type="text" required [(ngModel)]="direccion"></ion-input>
-</ion-item>
-
-   <div>
-    <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button color="primary" (click)="limpiarFormulario()">Agregar</ion-button>
-  </div>
+<div>
+  <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
+  <ion-button color="primary" (click)="limpiarFormulario()">Agregar</ion-button>
+</div>
 
 </ion-content>
