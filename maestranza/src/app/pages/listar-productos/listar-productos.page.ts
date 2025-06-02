@@ -66,7 +66,8 @@ export class ListarProductosPage implements OnInit {
   try {
     await this.fireService.agregarProducto(producto);
     alert('Producto agregado con éxito');
-    this.router.navigate(['/vista-inventario']); // o la ruta que uses
+    this.router.navigate(['/vista-inventario']);
+    this.limpiarFormulario();
   } catch (error) {
     console.error('Error al agregar producto:', error);
     alert('Hubo un error al guardar el producto');
@@ -74,7 +75,15 @@ export class ListarProductosPage implements OnInit {
  }
 
   cancelar() {
+    this.limpiarFormulario();
     this.router.navigate(['/home']); // cambia según donde quieras volver
+  }
+
+  limpiarFormulario() {
+    this.nombre = '';
+    this.descripcion = '';
+    this.ultimo_precio = null;
+    this.codigo_barra = '';
   }
 
 }
