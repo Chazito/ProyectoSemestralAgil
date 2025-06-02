@@ -48,10 +48,10 @@ export class EditarProveedoresPage implements OnInit {
     return;
   }
 
-  // Validación RUT (solo números + letra opcional al final, sin puntos ni guiones, entre 7 y 10 caracteres)
-  const rutRegex = /^[0-9]{6,9}[a-zA-Z]?$/;
+  // Validación RUT: solo números, y opcionalmente una 'k' al final, sin puntos ni guiones
+  const rutRegex = /^[0-9]{6,9}[kK]?$/;
   if (!rutRegex.test(this.rut) || this.rut.length < 7 || this.rut.length > 10) {
-    alert('El RUT debe tener entre 7 y 10 caracteres, solo números y una letra opcional al final, sin puntos ni guiones');
+    alert('El RUT debe tener entre 7 y 10 caracteres, solo números y una letra K opcional al final, sin puntos ni guiones');
     return;
   }
 
