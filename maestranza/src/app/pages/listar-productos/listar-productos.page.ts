@@ -25,27 +25,53 @@ export class ListarProductosPage implements OnInit {
   }
 
   async agregarProducto() {
-    if (!this.nombre || !this.descripcion || this.ultimo_precio == null || !this.codigo_barra) {
-      alert('Todos los campos son obligatorios');
-      return;
-    }
-
-    const producto = {
-      nombre: this.nombre,
-      descripcion: this.descripcion,
-      ultimo_precio: this.ultimo_precio,
-      codigo_barra: this.codigo_barra
-    };
-
-    try {
-      await this.fireService.agregarProducto(producto);
-      alert('Producto agregado con éxito');
-      this.router.navigate(['/vista-inventario']); // o cualquier otra ruta
-    } catch (error) {
-      console.error('Error al agregar producto:', error);
-      alert('Hubo un error al guardar el producto');
-    }
+  // Validar que no estén vacíos
+  if (!this.nombre || !this.descripcion || this.ultimo_precio == null || !this.codigo_barra) {
+    alert('Todos los campos son obligatorios');
+    return;
   }
+
+  // Validar longitud nombre
+  if (this.nombre.trim().length < 3) {
+    alert('El nombre del producto debe tener al menos 3 caracteres');
+    return;
+  }
+
+  // Validar longitud descripción
+  if (this.descripcion.trim().length < 5) {
+    alert('La descripción debe tener al menos 5 caracteres');
+    return;
+  }
+
+  // Validar precio positivo
+  if (this.ultimo_precio <= 0) {
+    alert('El precio debe ser un número positivo mayor a cero');
+    return;
+  }
+
+  // Validar código de barra: solo números, longitud 8 a 13
+  const codigoRegex = /^[0-9]{8,13}$/;
+  if (!codigoRegex.test(this.codigo_barra)) {
+    alert('El código de barra debe contener entre 8 y 13 dígitos y solo números');
+    return;
+  }
+
+  const producto = {
+    nombre: this.nombre.trim(),
+    descripcion: this.descripcion.trim(),
+    ultimo_precio: this.ultimo_precio,
+    codigo_barra: this.codigo_barra.trim()
+  };
+
+  try {
+    await this.fireService.agregarProducto(producto);
+    alert('Producto agregado con éxito');
+    this.router.navigate(['/vista-inventario']); // o la ruta que uses
+  } catch (error) {
+    console.error('Error al agregar producto:', error);
+    alert('Hubo un error al guardar el producto');
+  }
+ }
 
   cancelar() {
     this.router.navigate(['/home']); // cambia según donde quieras volver
