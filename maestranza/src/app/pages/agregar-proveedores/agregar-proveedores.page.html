@@ -23,7 +23,7 @@
 
   <ion-item>
     <ion-label position="floating">Número de contacto</ion-label>
-    <ion-input type="number" required [(ngModel)]="telefono"></ion-input>
+    <ion-input type="text" required [(ngModel)]="telefono"></ion-input>
   </ion-item>
 
   <ion-item>
@@ -49,7 +49,7 @@
 
 <div>
   <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-  <ion-button color="primary" (click)="limpiarFormulario()">Agregar</ion-button>
+  <ion-button color="primary" (click)="agregarProveedor()">Agregar</ion-button>
 </div>
 
 </ion-content>
