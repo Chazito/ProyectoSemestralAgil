@@ -28,7 +28,17 @@
     <ion-label position="floating">Ultimo Precio</ion-label>
     <ion-input [(ngModel)]="ultimo_precio" type="number"></ion-input>
   </ion-item>
-</ion-list>
+
+  <ion-item>
+    <ion-label position="floating">Elegir Bodega</ion-label>
+      <ion-select [(ngModel)]="nueva_bodega_elegida" interface="action-sheet">
+        <ion-select-option *ngFor="let bodega of bodegas" [value]="bodega.id">
+          {{ bodega.nombreBodega }}
+        </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  </ion-list>
 
   <div class="botones-cancelar-editar">
     <ion-button color="medium" (click)="cancelar()">

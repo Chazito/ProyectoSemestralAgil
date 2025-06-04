@@ -112,6 +112,7 @@ export interface Producto{
   descripcion : string;
   ultimo_precio : number;
   codigo_barra : string;
+  bodega_elegida : number;
 }
 
 export interface Bodega{
