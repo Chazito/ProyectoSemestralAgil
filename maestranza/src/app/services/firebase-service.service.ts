@@ -9,6 +9,7 @@ export class FirebaseServiceService {
 
   private collectionUsuarios = "usuarios";
   private collectionProductos = "productos";
+  private collectionBodegas = "bodegas";
 
   constructor(private firestore: Firestore) { }
 
@@ -58,6 +59,32 @@ export class FirebaseServiceService {
     const producto = doc(this.firestore, `${this.collectionProductos}/${id}`);
     await deleteDoc(producto);
   }
+
+  //para las bodegas 
+  async agregarBodega(data : Bodega) : Promise<void>{
+    const bodegaCollection = collection(this.firestore, this.collectionBodegas);
+    await addDoc(bodegaCollection, data);
+  }
+
+  getBodegas() : Observable<any[]>{
+    const bodegaCollection = collection(this.firestore, this.collectionBodegas);
+    return collectionData(bodegaCollection, {idField: "id"});
+  }
+
+  getBodegaById(id : string) : Observable<any>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    return docData(bodega, {idField: 'id'});
+  }
+
+  async updateBodega(id : string, data: any) : Promise<void>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    await updateDoc(bodega, data); 
+  }
+
+  async deleteBodega(id : string) : Promise<void>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    await deleteDoc(bodega);
+  }
 }
 
 export interface Usuario{
@@ -75,4 +102,12 @@ export interface Producto{
   descripcion : string;
   ultimo_precio : number;
   codigo_barra : string;
+}
+
+export interface Bodega{
+  id? : string;
+  codigoBodega : string;
+  nombreBodega : string;
+  direccionBodega : string;
+  capacidad : number;
 }

@@ -42,6 +42,18 @@ export const routes: Routes = [
     path: 'editar-proveedores',
     loadComponent: () => import('./pages/editar-proveedores/editar-proveedores.page').then( m => m.EditarProveedoresPage)
   },
+  {
+    path: 'agregar-bodega',
+    loadComponent: () => import('./pages/agregar-bodega/agregar-bodega.page').then( m => m.AgregarBodegaPage)
+  },
+  {
+    path: 'editar-bodega',
+    loadComponent: () => import('./pages/editar-bodega/editar-bodega.page').then( m => m.EditarBodegaPage)
+  },
+  {
+    path: 'listar-bodega',
+    loadComponent: () => import('./pages/listar-bodega/listar-bodega.page').then( m => m.ListarBodegaPage)
+  },
 
 
 
