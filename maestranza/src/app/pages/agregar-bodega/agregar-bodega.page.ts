@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './agregar-bodega.page.html',
   styleUrls: ['./agregar-bodega.page.scss'],
   standalone: true,
-  imports: [IonInput, IonText, IonCardTitle, IonItem, IonLabel, IonList, IonCardContent, IonButton, IonCardHeader, IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonInput, IonText,  IonItem, IonLabel, IonList, IonCardContent, IonButton,  IonCard, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class AgregarBodegaPage implements OnInit {
 
@@ -31,24 +31,24 @@ export class AgregarBodegaPage implements OnInit {
 
     // Validar que no estén vacíos (incluyendo capacidad)
     if (!this.codigoBodega?.trim() || !this.nombreBodega?.trim() || !this.direccionBodega?.trim()) {
-      alert('Todos los campos son obligatorios');
+      this.fireService.presentAlert('Error', 'Todos los campos son obligatorios');
       return;
     }
 
      if (this.codigoBodega.trim().length < 3) {
-      alert('El codgio de la bodega debe tener al menos 3 caracteres');
+     this.fireService.presentAlert('Error', 'El codgio de la bodega debe tener al menos 3 caracteres');
       return;
     }
 
     // Validar longitud nombre
     if (this.nombreBodega.trim().length < 5) {
-      alert('El nombre de la bodega debe tener al menos 8 caracteres');
+      this.fireService.presentAlert('Error', 'El nombre de la bodega debe tener al menos 8 caracteres');
       return;
     }
 
     // Validar longitud dirección
     if (this.direccionBodega.trim().length < 5) {
-      alert('La dirección de la bodega debe tener al menos 10 caracteres');
+      this.fireService.presentAlert('Error', 'La dirección de la bodega debe tener al menos 10 caracteres');
       return;
     }
 
@@ -91,12 +91,12 @@ export class AgregarBodegaPage implements OnInit {
 
     try {
     await this.fireService.agregarBodega( bodega);
-    alert('Bodega agregado con éxito');
+    this.fireService.presentAlert('Exito', 'Bodega agregado con éxito');
     this.router.navigate(['/listar-bodega']);
     this.limpiarFormulario();
   } catch (error) {
     console.error('Error al agregar Bodega:', error);
-    alert('Hubo un error al guardar el Bodega');
+    this.fireService.presentAlert('Error', 'Hubo un error al guardar el Bodega');
   }
   }
 

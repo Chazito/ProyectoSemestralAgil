@@ -30,7 +30,8 @@ export const routes: Routes = [
   {
     path: 'vista-inventario',
     loadComponent: () => import('./vista-inventario/vista-inventario.page').then( m => m.VistaInventarioPage)
-  },  {
+  },
+  {
     path: 'agregar-proveedores',
     loadComponent: () => import('./pages/agregar-proveedores/agregar-proveedores.page').then( m => m.AgregarProveedoresPage)
   },
@@ -47,7 +48,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/agregar-bodega/agregar-bodega.page').then( m => m.AgregarBodegaPage)
   },
   {
-    path: 'editar-bodega',
+    path: 'editar-bodega/:id',
     loadComponent: () => import('./pages/editar-bodega/editar-bodega.page').then( m => m.EditarBodegaPage)
   },
   {

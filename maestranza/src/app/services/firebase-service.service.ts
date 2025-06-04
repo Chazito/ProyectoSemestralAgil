@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -11,7 +12,16 @@ export class FirebaseServiceService {
   private collectionProductos = "productos";
   private collectionBodegas = "bodegas";
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore ,  private alertController: AlertController) { }
+
+    async presentAlert(titulo: string, msj: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: msj,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 
   getUsuarios() : Observable<any[]>{
     const userCollection = collection(this.firestore, this.collectionUsuarios);
