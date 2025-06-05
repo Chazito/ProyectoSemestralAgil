@@ -6,11 +6,13 @@
           <ion-list-header>Bienvenido</ion-list-header>
           <ion-note *ngIf="user">
             {{ user.nombre }} {{ user.apellido }}<br />
-            {{ user.email }}
+            {{ user.email }} -
+            {{ roles[user.rol] }}
           </ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>

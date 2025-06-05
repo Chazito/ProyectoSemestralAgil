@@ -18,10 +18,8 @@ export class EditarBodegaPage implements OnInit {
 
   private firestore = inject(Firestore);
 
-  codigoBodega: string = "";
   nombreBodega: string = "";
   direccionBodega: string = "";
-  capacidad: string = "";
 
   private bodegaId : string = "";
 
@@ -35,10 +33,8 @@ export class EditarBodegaPage implements OnInit {
       getDoc(ref).then(snapshot => {
         if (snapshot.exists()) {
           const bodega = snapshot.data();
-          this.codigoBodega = bodega['codigoBodega'];
           this.nombreBodega = bodega['nombreBodega'];
           this.direccionBodega = bodega['direccionBodega'];
-          this.capacidad = bodega['capacidad'];
         }
       });
     }
@@ -49,14 +45,8 @@ editarBodega() {
 
 
   // Validar campos vacíos
-  if (!this.codigoBodega?.trim() || !this.nombreBodega?.trim() || !this.direccionBodega?.trim()) {
+  if (!this.nombreBodega?.trim() || !this.direccionBodega?.trim()) {
     this.showToast('Todos los campos son obligatorios');
-    return;
-  }
-
-  // Validar longitud código
-  if (this.codigoBodega.trim().length < 3) {
-    this.showToast('El código de la bodega debe tener al menos 3 caracteres');
     return;
   }
 
@@ -72,37 +62,10 @@ editarBodega() {
     return;
   }
 
-  // Validar capacidad
-  if (this.capacidad === null || this.capacidad === undefined || this.capacidad === '' || this.capacidad === '0') {
-    this.showToast('La capacidad es obligatoria');
-    return;
-  }
-
-  const capacidad = typeof this.capacidad === 'string' ? parseFloat(this.capacidad) : this.capacidad;
-
-  if (isNaN(capacidad)) {
-    this.showToast('La capacidad debe ser un número válido');
-    return;
-  }
-
-  if (capacidad < 1) {
-    this.showToast('La capacidad no puede ser menor a 1');
-    return;
-  }
-
-  if (!Number.isInteger(capacidad)) {
-    this.showToast('No se permiten decimales en la capacidad');
-    return;
-  }
-
-
-
   const ref = doc(this.firestore, `bodegas/${this.bodegaId}`);
   updateDoc(ref, {
-    codigoBodega: this.codigoBodega,
     nombreBodega: this.nombreBodega,
     direccionBodega: this.direccionBodega,
-    capacidad: this.capacidad,
   });
 
   this.showToast('Bodega actualizada correctamente.');

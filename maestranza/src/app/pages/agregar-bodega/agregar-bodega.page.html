@@ -5,44 +5,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-<ion-card>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Nombre de la bodega</ion-label>
+          <ion-input type="text" required [(ngModel)]="nombreBodega"></ion-input>
+        </ion-item>
 
-  <ion-card-content>
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">codigo de bodega</ion-label>
-        <ion-input type="text" required [(ngModel)]="codigoBodega"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-label position="floating">Dirección de la bodega</ion-label>
+          <ion-input type="text" required [(ngModel)]="direccionBodega"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-      <ion-item>
-        <ion-label position="floating">Nombre de la bodega</ion-label>
-        <ion-input type="text" required [(ngModel)]="nombreBodega"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Dirección de la bodega</ion-label>
-        <ion-input type="text" required [(ngModel)]="direccionBodega"></ion-input>
-      </ion-item>
-
-   <ion-item>
-      <ion-label position="floating">Capacidad de la bodega</ion-label>
-      <ion-input 
-        type="number" 
-        required 
-        [(ngModel)]="capacidad">
-      </ion-input>
-    </ion-item>
-
-    <ion-text color="danger" *ngIf="mensajeErrorCapacidad">
-      {{ mensajeErrorCapacidad }}
-    </ion-text>
-
-    </ion-list>
-  </ion-card-content>
-</ion-card>
-
-<div>
-  <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-  <ion-button color="primary" (click)="agregarBodega()">Agregar</ion-button>
-</div>
+  <div>
+    <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
+    <ion-button color="primary" (click)="agregarBodega()">Agregar</ion-button>
+  </div>
 </ion-content>

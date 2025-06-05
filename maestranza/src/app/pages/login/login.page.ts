@@ -17,11 +17,11 @@ import { UserService } from 'src/app/services/user.service';
   imports: [IonIcon, IonInput, IonList, IonItem, IonLabel, IonCardContent, IonCardTitle, IonCardHeader, IonCardSubtitle, IonCard, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
-  
+
   // Variable para controlar la visibilidad de la contraseña
   showPassword = false;
-  
-  constructor(private router: Router, private alertController: AlertController, private fireService : FirebaseServiceService, private userService: UserService) {
+
+  constructor(private router: Router, private alertController: AlertController, private fireService: FirebaseServiceService, private userService: UserService) {
     // Registramos los iconos que vamos a usar
     addIcons({
       'eye-outline': eyeOutline,
@@ -30,6 +30,9 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    if (this.userService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
+    }
   }
 
   // Método para alternar la visibilidad de la contraseña
@@ -59,21 +62,21 @@ export class LoginPage implements OnInit {
     await alert.present();
   }
 
-  
+
   //funcion que valida los datos y muestra las alertas
-  async Ingresar(){
+  async Ingresar() {
     // Verificar si los campos están vacíos
     if (!this.objetoLogin.correo.trim() || !this.objetoLogin.contrasena.trim()) {
       this.alertaIni('Por favor complete todos los campos');
       return;
     }
-    
+
     // Verificar las credenciales
     if (await this.fireService.datosValidos(this.objetoLogin.correo, this.objetoLogin.contrasena)) {
       await this.userService.setUser(this.objetoLogin.correo);
       this.alertaIni('Login correcto');
       this.limpiarFormulario();
-      this.router.navigate(['/vista-inventario']);
+      this.router.navigate(['/home']);
     }
     else {
       this.limpiarFormulario();

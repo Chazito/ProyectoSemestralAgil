@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Editar Ubicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Zona</ion-label>
+          <ion-input type="text" required [(ngModel)]="zona" name="zona"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Estante</ion-label>
+          <ion-input type="text" required [(ngModel)]="estante" name="estante"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Nivel</ion-label>
+          <ion-input type="text" required [(ngModel)]="nivel" name="nivel"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Bodega</ion-label>
+          <ion-select interface="popover" [(ngModel)]="id_bodega" name="bodega">
+            <ion-select-option *ngFor="let bodega of bodegas" [value]="bodega.id">
+              {{ bodega.nombreBodega }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" (click)="actualizarUbicacion()">Guardar Cambios</ion-button>
+  <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+</ion-content>

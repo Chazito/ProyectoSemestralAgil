@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Movimientos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="agregarMovimiento()">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        Agregar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Producto</th>
+            <th>Ubicación</th>
+            <th>Cantidad</th>
+            <th>Acción</th>
+            <th>Comentario</th>
+            <th>Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mov of movimientos">
+            <td>{{ mov.fecha | date: 'short' }}</td>
+            <td>{{ obtenerNombreProducto(mov.codigo_barra) }}</td>
+            <td>{{ obtenerNombreUbicacion(mov.id_ubicacion) }}</td>
+            <td>{{ mov.cantidad }}</td>
+            <td>{{ mov.accion }}</td>
+            <td>{{ mov.comentario }}</td>
+            <td>{{ obtenerEmailUsuario(mov.id_usuario) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

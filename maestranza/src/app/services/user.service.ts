@@ -25,10 +25,12 @@ export class UserService {
 
     if (userSnap.exists()) {
       const data = userSnap.data();
-      const user = {
+      const user: Usuario = {
         email: email,
         nombre: data['nombre'],
-        apellido: data['apellido']
+        contrasena: "",
+        apellido: data['apellido'],
+        rol: data['rol']
       };
 
       this.userData = user;

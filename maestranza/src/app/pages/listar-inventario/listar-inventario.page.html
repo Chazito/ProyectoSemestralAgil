@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Inventario por Bodega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Bodega</ion-label>
+        <ion-select [(ngModel)]="bodegaSeleccionada" (ionChange)="cargarInventario()">
+          <ion-select-option *ngFor="let bodega of bodegas" [value]="bodega.id">
+            {{ bodega.nombreBodega }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-grid *ngIf="inventario.length > 0">
+        <ion-row>
+          <ion-col><strong>Producto</strong></ion-col>
+          <ion-col><strong>Total</strong></ion-col>
+          <ion-col><strong>Stock Mínimo</strong></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let producto of inventario">
+          <ion-col>{{ producto.nombre }}</ion-col>
+          <ion-col>{{ producto.total }}</ion-col>
+          <ion-col>
+            <ion-input [(ngModel)]="producto.stock_min" type="number"></ion-input>
+          </ion-col>
+          <ion-col>
+            <ion-button size="small" (click)="guardarStockMinimo(producto)">
+              Guardar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-text color="medium" *ngIf="inventario.length === 0 && bodegaSeleccionada">
+        <p>No hay productos en esta bodega.</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

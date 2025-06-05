@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Agregar Movimiento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+
+        <!-- Producto -->
+        <ion-item>
+          <ion-label position="floating">Producto</ion-label>
+          <ion-select interface="popover" [(ngModel)]="codigo_barra" name="producto">
+            <ion-select-option *ngFor="let p of productos" [value]="p.codigo_barra">
+              {{ p.nombre }} ({{ p.codigo_barra }})
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Ubicación -->
+        <ion-item>
+          <ion-label position="floating">Ubicación</ion-label>
+          <ion-select interface="popover" [(ngModel)]="id_ubicacion" name="ubicacion">
+            <ion-select-option *ngFor="let u of ubicaciones" [value]="u.id">
+              {{ u.zona }}-{{ u.estante }}-{{ u.nivel }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Acción -->
+        <ion-item>
+          <ion-label position="floating">Acción</ion-label>
+          <ion-select interface="popover" [(ngModel)]="accion" name="accion">
+            <ion-select-option value="Entrada">Entrada</ion-select-option>
+            <ion-select-option value="Salida">Salida</ion-select-option>
+            <ion-select-option value="Uso">Uso</ion-select-option>
+            <ion-select-option value="Devolucion">Devolución</ion-select-option>
+            <ion-select-option value="Traslado">Traslado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Cantidad -->
+        <ion-item>
+          <ion-label position="floating">Cantidad</ion-label>
+          <ion-input type="number" [(ngModel)]="cantidad" name="cantidad"></ion-input>
+        </ion-item>
+
+        <!-- Comentario -->
+        <ion-item>
+          <ion-label position="floating">Comentario</ion-label>
+          <ion-input type="text" [(ngModel)]="comentario" name="comentario"></ion-input>
+        </ion-item>
+
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="primary" (click)="guardarMovimiento()">Guardar</ion-button>
+  <ion-button expand="block" color="medium" (click)="cancelar()">Cancelar</ion-button>
+</ion-content>
