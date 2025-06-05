@@ -21,6 +21,7 @@
             <th>Nombre</th>
             <th>Descripción</th>
             <th>Último Precio</th>
+            <th>Bodega</th>
             <th>Acciones</th>
           </tr>
         </thead>
@@ -30,6 +31,8 @@
             <td>{{ producto.nombre }}</td>
             <td>{{ producto.descripcion }}</td>
             <td>{{ producto.ultimo_precio | currency:'CLP':'symbol':'1.0-0' }}</td>
+            <td>{{ getNombreBodega(producto.bodega_elegida) }}</td>
+
             <td>
               <ion-button fill="clear" size="small" color="primary" (click)="editar(producto)">
                 <ion-icon name="create-outline" slot="icon-only"></ion-icon>

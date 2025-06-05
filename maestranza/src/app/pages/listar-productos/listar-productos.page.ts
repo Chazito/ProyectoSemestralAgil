@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
 import { Router } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './listar-productos.page.html',
   styleUrls: ['./listar-productos.page.scss'],
   standalone: true,
-  imports: [IonList, IonItem, IonLabel, IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonList, IonItem, IonLabel, IonInput, IonButton, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule,  IonSelect, IonSelectOption,]
 })
 export class ListarProductosPage implements OnInit {
 
@@ -19,14 +19,22 @@ export class ListarProductosPage implements OnInit {
   ultimo_precio : number | null = null;
   codigo_barra : string = "";
 
+
+  bodega_elegida :number | null = null;
+  bodegas : any;
+
   constructor(private fireService : FirebaseServiceService, private router : Router) { }
 
-  ngOnInit() {
-  }
+ ngOnInit() {
+  this.fireService.getBodegas().subscribe(data => {
+    console.log("Bodegas recibidas:", data);  
+    this.bodegas = data;
+  });
+}
 
   async agregarProducto() {
   // Validar que no estén vacíos
-  if (!this.nombre || !this.descripcion || this.ultimo_precio == null || !this.codigo_barra) {
+  if (!this.nombre || !this.descripcion || this.ultimo_precio == null || !this.codigo_barra || !this.bodega_elegida) {
     alert('Todos los campos son obligatorios');
     return;
   }
@@ -60,7 +68,8 @@ export class ListarProductosPage implements OnInit {
     nombre: this.nombre.trim(),
     descripcion: this.descripcion.trim(),
     ultimo_precio: this.ultimo_precio,
-    codigo_barra: this.codigo_barra.trim()
+    codigo_barra: this.codigo_barra.trim(),
+    bodega_elegida: this.bodega_elegida
   };
 
   try {
@@ -84,6 +93,7 @@ export class ListarProductosPage implements OnInit {
     this.descripcion = '';
     this.ultimo_precio = null;
     this.codigo_barra = '';
+    this.bodega_elegida = null;
   }
 
 }

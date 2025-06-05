@@ -1,0 +1,75 @@
+:host {
+    display: block;
+    height: 100vh;
+    background-color: #000000;
+  }
+  
+  /* Fondo negro completo */
+  ion-content {
+    --background: #000000 !important;
+    background-color: #000000 !important;
+    color: #ffffff;
+  }
+  
+  /* Título centrado y en amarillo oscuro */
+  .titulo-editar-productos {
+    color: #e0c200;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 12px;
+  }
+  
+  /* Estilo lista de edición */
+  .datos-editar {
+    padding: 16px;
+  }
+  
+  /* Input container */
+  ion-item {
+    --background: #2a2a2a;
+    --color: #ffffff;
+    border: 2px solid #ffea00;
+    border-radius: 10px;
+    margin-bottom: 14px;
+  }
+  
+  /* Labels de los inputs */
+  ion-label {
+    color: #ffea00;
+    font-weight: bold;
+  }
+  
+  /* Texto dentro de los inputs */
+  ion-input {
+    color: #ffffff;
+  }
+  
+  /* Contenedor de los botones centrados */
+  .botones-cancelar-editar {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  
+  /* Botones estilo amarillo llamativo */
+  .botones-cancelar-editar ion-button {
+    --background: #ffea00;
+    --color: #000000;
+    border: 2px solid #ffea00;
+    border-radius: 12px;
+    font-weight: bold;
+    box-shadow: 0 0 10px #ffea00;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 120px;
+    text-align: center;
+  }
+  
+  /* Hover con efecto visual */
+  .botones-cancelar-editar ion-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ffea00;
+  }
+  

@@ -20,6 +20,8 @@ export class VistaInventarioPage implements OnInit {
 
   productos : Producto[] = [];
 
+   bodegas : any;
+
   constructor(private fireService : FirebaseServiceService, private alertController : AlertController, private router : Router) {
     addIcons({createOutline,closeCircleOutline,addCircleOutline,trashOutline,create,logOutOutline});
     this.fireService.getProductos().subscribe(
@@ -27,9 +29,20 @@ export class VistaInventarioPage implements OnInit {
         this.productos = data;
       }
     );
+    this.fireService.getBodegas().subscribe(data => {
+    console.log("Bodegas recibidas:", data);  
+    this.bodegas = data;
+  });
   }
 
   ngOnInit() {}
+
+  getNombreBodega(id: string | number): string {
+  const bodega = this.bodegas?.find((b: any) => b.id == id); // Usamos == para comparar string con number
+  return bodega ? bodega.nombreBodega : 'No asociado';
+}
+
+
 
   editar(producto: any) {
     console.log('Editar producto', producto.id);

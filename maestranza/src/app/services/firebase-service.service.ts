@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { addDoc, collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, updateDoc } from '@angular/fire/firestore';
+import { AlertController } from '@ionic/angular';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -9,9 +10,19 @@ export class FirebaseServiceService {
 
   private collectionUsuarios = "usuarios";
   private collectionProductos = "productos";
+  private collectionBodegas = "bodegas";
   private collectionProveedores = "proveedores";
 
-  constructor(private firestore: Firestore) { }
+  constructor(private firestore: Firestore ,  private alertController: AlertController) { }
+
+    async presentAlert(titulo: string, msj: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: msj,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 
   getUsuarios() : Observable<any[]>{
     const userCollection = collection(this.firestore, this.collectionUsuarios);
@@ -60,6 +71,30 @@ export class FirebaseServiceService {
     await deleteDoc(producto);
   }
 
+  //para las bodegas 
+  async agregarBodega(data : Bodega) : Promise<void>{
+    const bodegaCollection = collection(this.firestore, this.collectionBodegas);
+    await addDoc(bodegaCollection, data);
+  }
+
+  getBodegas() : Observable<any[]>{
+    const bodegaCollection = collection(this.firestore, this.collectionBodegas);
+    return collectionData(bodegaCollection, {idField: "id"});
+  }
+
+  getBodegaById(id : string) : Observable<any>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    return docData(bodega, {idField: 'id'});
+  }
+
+  async updateBodega(id : string, data: any) : Promise<void>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    await updateDoc(bodega, data); 
+  }
+
+  async deleteBodega(id : string) : Promise<void>{
+    const bodega = doc(this.firestore, `${this.collectionBodegas}/${id}`);
+    await deleteDoc(bodega);
   async agregarProveedor(proveedor : Proveedor) : Promise<void>{
     const proveedorCollection = collection(this.firestore, this.collectionProveedores);
     await addDoc(proveedorCollection, proveedor);
@@ -96,6 +131,15 @@ export interface Producto{
   descripcion : string;
   marca : string;
   codigo_barra : string;
+  bodega_elegida : number;
+}
+
+export interface Bodega{
+  id? : string;
+  codigoBodega : string;
+  nombreBodega : string;
+  direccionBodega : string;
+  capacidad : number;
   ultima_compra_id : string;
   etiquetas : [];
 }

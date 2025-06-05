@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Bodegas</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="agregarBodega()">
+          <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+          Agregar Bodega
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-content>
+      <table class="inventory-table">
+        <thead>
+          <tr>
+            <th>Código de la Bodega</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Capacidad</th>
+            <th>Disponibilidad</th>
+            <th>Edita</th>
+            <th>Elimina</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bodega of bodegas">
+            <td>{{ bodega.codigoBodega }}</td>
+            <td>{{ bodega.nombreBodega }}</td>
+            <td>{{ bodega.direccionBodega }}</td>
+            <td>{{ bodega.capacidad | number:'1.0-0' }}</td>
+            <!--<td>{{ bodega.disponibilidad | number:'1.0-0' }}</td>-->
+            <td>pendiente</td>
+            <td>
+              <ion-button fill="clear" size="small" color="primary" (click)="editar(bodega)">
+                <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+                Editar
+              </ion-button>
+              </td>
+              <td>
+              <ion-button fill="clear" size="small" color="danger" (click)="eliminar(bodega)">
+                <ion-icon name="close-circle-outline" slot="icon-only"></ion-icon>
+                Eliminar
+              </ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

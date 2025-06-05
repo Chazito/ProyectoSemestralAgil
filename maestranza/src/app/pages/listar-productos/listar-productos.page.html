@@ -28,7 +28,17 @@
       <ion-label position="floating">Codigo de Barra</ion-label>
       <ion-input type="text" required [(ngModel)]="codigo_barra"></ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Elegir Bodega</ion-label>
+      <ion-select [(ngModel)]="bodega_elegida" interface="action-sheet">
+        <ion-select-option *ngFor="let bodega of bodegas" [value]="bodega.id">
+          {{ bodega.nombreBodega }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
   </ion-list>
+
 
   <div class="botones-cancelar-agregar">
     <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>

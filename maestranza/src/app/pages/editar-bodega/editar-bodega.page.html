@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Editar Bodega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-label position="floating">Código de la Bodega</ion-label>
+                <ion-input [(ngModel)]="codigoBodega" type="text" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Nombre de la Bodega</ion-label>
+                <ion-input [(ngModel)]="nombreBodega" type="text" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Dirección de la Bodega</ion-label>
+                <ion-input [(ngModel)]="direccionBodega" type="text" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Capacidad de la Bodega</ion-label>
+                <ion-input [(ngModel)]="capacidad" type="number" required></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+          <ion-button expand="block" color="primary" (click)="editarBodega()">Guardar</ion-button>
+          <ion-button expand="block" color="secondary" (click)="cancelar()">Cancelar</ion-button>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
