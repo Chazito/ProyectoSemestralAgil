@@ -128,6 +128,10 @@ export const routes: Routes = [
   },  {
     path: 'agregar-proyecto',
     loadComponent: () => import('./pages/agregar-proyecto/agregar-proyecto.page').then( m => m.AgregarProyectoPage)
+  },
+  {
+    path: 'listar-proyecto',
+    loadComponent: () => import('./pages/listar-proyecto/listar-proyecto.page').then( m => m.ListarProyectoPage)
   }
 
 
