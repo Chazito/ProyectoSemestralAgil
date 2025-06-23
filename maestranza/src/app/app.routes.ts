@@ -125,7 +125,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/listar-ubicaciones/listar-ubicaciones.page').then(m => m.ListarUbicacionesPage),
     canActivate: [AuthGuard],
     data: { roles: [0, 1] }
+  },  {
+    path: 'agregar-proyecto',
+    loadComponent: () => import('./pages/agregar-proyecto/agregar-proyecto.page').then( m => m.AgregarProyectoPage)
   }
+
 
 
 
