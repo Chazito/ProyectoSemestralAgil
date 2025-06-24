@@ -140,6 +140,10 @@ export const routes: Routes = [
   {
     path: 'agregar-solicitud-material',
     loadComponent: () => import('./pages/agregar-solicitud-material/agregar-solicitud-material.page').then( m => m.AgregarSolicitudMaterialPage)
+  },
+  {
+    path: 'listar-solicitud-material',
+    loadComponent: () => import('./pages/listar-solicitud-material/listar-solicitud-material.page').then( m => m.ListarSolicitudMaterialPage)
   }
 
 
