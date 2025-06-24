@@ -136,6 +136,10 @@ export const routes: Routes = [
   {
     path: 'editar-proyecto',
     loadComponent: () => import('./pages/editar-proyecto/editar-proyecto.page').then( m => m.EditarProyectoPage)
+  },
+  {
+    path: 'agregar-solicitud-material',
+    loadComponent: () => import('./pages/agregar-solicitud-material/agregar-solicitud-material.page').then( m => m.AgregarSolicitudMaterialPage)
   }
 
 
