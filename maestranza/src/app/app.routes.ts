@@ -132,6 +132,10 @@ export const routes: Routes = [
   {
     path: 'listar-proyecto',
     loadComponent: () => import('./pages/listar-proyecto/listar-proyecto.page').then( m => m.ListarProyectoPage)
+  },
+  {
+    path: 'editar-proyecto',
+    loadComponent: () => import('./pages/editar-proyecto/editar-proyecto.page').then( m => m.EditarProyectoPage)
   }
 
 
