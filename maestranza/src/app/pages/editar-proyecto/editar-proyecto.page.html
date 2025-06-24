@@ -5,10 +5,43 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha</ion-label>
+      <ion-input type="date" required [(ngModel)]="fecha"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Empleados</ion-label>
+      <ion-select
+        required
+        multiple="true"
+        cancelText="Cerrar"
+        okText="Ok"
+        [(ngModel)]="empleados"
+      >
+        <ion-select-option>Gerente de proyecto</ion-select-option>
+        <ion-select-option>Comprador</ion-select-option>
+        <ion-select-option>Logística</ion-select-option>
+        <ion-select-option>Trabajador de planta</ion-select-option>
+        <ion-select-option>Gestor de inventario</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Materiales</ion-label>
+      <ion-input type="text" required [(ngModel)]="materiales"></ion-input>
+    </ion-item>
+  </ion-list>
 
   <div>
     <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button color="primary" >Editar</ion-button>
+    <ion-button color="primary" (click)="editarProyecto()">Editar</ion-button>
   </div>
 </ion-content>
+
