@@ -28,7 +28,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let mov of movimientos">
-            <td>{{ mov.fecha | date: 'short' }}</td>
+            <td>{{ mov.fecha.toDate() | date: 'medium' }}</td>
             <td>{{ obtenerNombreProducto(mov.codigo_barra) }}</td>
             <td>{{ obtenerNombreUbicacion(mov.id_ubicacion) }}</td>
             <td>{{ mov.cantidad }}</td>

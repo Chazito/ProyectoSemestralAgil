@@ -8,6 +8,7 @@ import { eyeOffOutline, eyeOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
 import { UserService } from 'src/app/services/user.service';
+import { MockDataService } from 'src/app/services/mock-data.service';
 
 @Component({
   selector: 'app-login',
@@ -76,7 +77,7 @@ export class LoginPage implements OnInit {
       await this.userService.setUser(this.objetoLogin.correo);
       this.alertaIni('Login correcto');
       this.limpiarFormulario();
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     }
     else {
       this.limpiarFormulario();

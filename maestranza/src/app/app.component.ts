@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
   // 0 = administrador, 1 = gestorInventario, etc.
   private permisosPorRol: { [rol: number]: any[] } = {
     0: [ // administrador
-      { title: 'Dashboard', url: '/home', icon: 'home-outline' },
+      { title: 'Dashboard', url: '/dashboard', icon: 'home-outline' },
       { title: 'Vista Inventario', url: '/inventario', icon: 'cube-outline' },
       { title: 'Proveedores', url: '/proveedores', icon: 'people-outline' },
       { title: 'Bodegas', url: '/bodegas', icon: 'storefront-outline' },

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, docData, Firestore, getDoc, increment, orderBy, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { addDoc, collection, collectionData, CollectionReference, deleteDoc, doc, docData, Firestore, getDoc, getDocs, increment, orderBy, query, setDoc, Timestamp, updateDoc, where } from '@angular/fire/firestore';
 import { AlertController } from '@ionic/angular';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, firstValueFrom, map, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -292,6 +292,30 @@ export class FirebaseServiceService {
     return data['cantidad'] || 0;
   }
 
+  async getLowStockAlertsOnce(): Promise<any[]> {
+    const bodegasSnap = await firstValueFrom(this.getBodegas());
+    const alerts: any[] = [];
+
+    for (const bodega of bodegasSnap) {
+      const productosRef = collection(this.firestore, `inventario/${bodega.id}/productos`);
+      const productosSnap = await getDocs(productosRef);
+
+      productosSnap.forEach(doc => {
+        const data = doc.data();
+        if (data['total'] < data['stock_min']) {
+          alerts.push({
+            ...data,
+            id: doc.id,
+            id_bodega: bodega.id,
+            nombre_bodega: bodega.nombreBodega
+          });
+        }
+      });
+    }
+
+    return alerts;
+  }
+
   async verificarCantidadDisponible(
     codigo_barra: string,
     id_ubicacion: string,
@@ -374,7 +398,7 @@ export interface Movimiento {
   codigo_barra: string;
   id_ubicacion: string;
   id_usuario: string;
-  fecha: Date;
+  fecha: Timestamp;
   cantidad: number;
   accion: string; //Salida | Entrada | Uso | Devolucion | Traslado
   comentario: string;
