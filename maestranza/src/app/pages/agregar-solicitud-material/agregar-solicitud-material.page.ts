@@ -55,7 +55,7 @@ export class AgregarSolicitudMaterialPage implements OnInit {
 
     alert('Solicitud agregada correctamente');
     this.limpiarFormulario();
-    this.router.navigate(['/agregar-proyecto']); // ajusta la ruta
+    this.router.navigate(['/listar-solicitud-material']); // ajusta la ruta
   }
 }
 
