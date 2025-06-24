@@ -8,6 +8,7 @@ import {
 import { createOutline, trashOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { Router } from '@angular/router';
+import { FirebaseServiceService, SolicitudMateriales } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-listar-solicitud-material',
@@ -22,34 +23,39 @@ import { Router } from '@angular/router';
 })
 export class ListarSolicitudMaterialPage implements OnInit {
 
-  solicitudes = [
-    { nombre: 'Carlos Rojas', materiales: 'Madera, Clavos' },
-    { nombre: 'Ana Pérez', materiales: 'Tornillos, Pintura' },
-    { nombre: 'Luis Ramírez', materiales: 'Cemento, Arena' }
-  ];
+  solicitudes: SolicitudMateriales[] = []; // Ahora viene de Firebase
 
-  constructor(private router : Router, private alertController: AlertController) {
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private fireService: FirebaseServiceService
+  ) {
     addIcons({ createOutline, trashOutline });
   }
 
   ngOnInit() {
+    this.cargarSolicitudes();
+  }
 
+  cargarSolicitudes() {
+    this.fireService.getSolicitudMateriales().subscribe(data => {
+      this.solicitudes = data;
+    });
   }
 
   editar() {
-    console.log('Editar proyecto');
+    console.log('Editar solicitud');
     this.router.navigate(['/editar-solicitud-material']);
-    // Aquí podrías redirigir a otra página o abrir un modal
   }
 
-  agregarSolicitud(){
-    this.router.navigate(['/agregar-solicitud-material'])
+  agregarSolicitud() {
+    this.router.navigate(['/agregar-solicitud-material']);
   }
 
-  async confirmarEliminar() {
+  async confirmarEliminar(solicitud: SolicitudMateriales) {
     const alert = await this.alertController.create({
-      header: '¿Eliminar producto?',
-      message: `¿Estás seguro que quieres eliminar esto?`,
+      header: '¿Eliminar solicitud?',
+      message: `¿Estás seguro que quieres eliminar la solicitud de ${solicitud.nombre}?`,
       buttons: [
         {
           text: 'Cancelar',
@@ -58,11 +64,13 @@ export class ListarSolicitudMaterialPage implements OnInit {
         {
           text: 'Eliminar',
           role: 'destructive',
+          handler: async () => {
+            await this.fireService.deleteSolicitudMateriales(solicitud.id!);
+            this.cargarSolicitudes();
+          },
         },
       ],
     });
-
     await alert.present();
   }
 }
-

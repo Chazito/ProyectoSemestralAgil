@@ -12,6 +12,9 @@ export class FirebaseServiceService {
   private collectionProductos = "productos";
   private collectionBodegas = "bodegas";
   private collectionProveedores = "proveedores";
+  private collectionProyectos = "proyectos";
+  private collectionSolicitudMateriales = "solicitudMateriales";
+
 
   constructor(public firestore: Firestore, private alertController: AlertController) { }
 
@@ -335,6 +338,64 @@ export class FirebaseServiceService {
     const ref = doc(this.firestore, path);
     return await updateDoc(ref, data);
   }
+
+    //#region Proyectos
+  async agregarProyecto(data: Proyectos): Promise<void> {
+    const proyectosCollection = collection(this.firestore, this.collectionProyectos);
+    await addDoc(proyectosCollection, data);
+  }
+
+  getProyectos(): Observable<any[]> {
+    const proyectosCollection = collection(this.firestore, this.collectionProyectos);
+    return collectionData(proyectosCollection, { idField: "id" });
+  }
+
+  getProyectoById(id: string): Observable<any> {
+    const proyecto = doc(this.firestore, `${this.collectionProyectos}/${id}`);
+    return docData(proyecto, { idField: 'id' });
+  }
+
+  async updateProyecto(id: string, data: any): Promise<void> {
+    const proyecto = doc(this.firestore, `${this.collectionProyectos}/${id}`);
+    await updateDoc(proyecto, data);
+  }
+
+  async deleteProyecto(id: string): Promise<void> {
+    const proyecto = doc(this.firestore, `${this.collectionProyectos}/${id}`);
+    await deleteDoc(proyecto);
+  }
+  
+//#endregion
+
+//#region SolicitudMateriales
+  async agregarSolicitudMateriales(data: SolicitudMateriales): Promise<void> {
+    const solicitudMaterialesCollection = collection(this.firestore, this.collectionSolicitudMateriales);
+    await addDoc(solicitudMaterialesCollection, data);
+  }
+
+  getSolicitudMateriales(): Observable<any[]> {
+    const solicitudMaterialesCollection = collection(this.firestore, this.collectionSolicitudMateriales);
+    return collectionData(solicitudMaterialesCollection, { idField: "id" });
+  }
+
+  getSolicitudMaterialesById(id: string): Observable<any> {
+    const solicitudMateriales = doc(this.firestore, `${this.collectionSolicitudMateriales}/${id}`);
+    return docData(solicitudMateriales, { idField: 'id' });
+  }
+
+  async updateSolicitudMateriales(id: string, data: any): Promise<void> {
+    const solicitudMateriales = doc(this.firestore, `${this.collectionSolicitudMateriales}/${id}`);
+    await updateDoc(solicitudMateriales, data);
+  }
+
+  async deleteSolicitudMateriales(id: string): Promise<void> {
+    const solicitudMateriales = doc(this.firestore, `${this.collectionSolicitudMateriales}/${id}`);
+    await deleteDoc(solicitudMateriales);
+  }   
+
+
+//#endregion
+
 }
 
 export interface Usuario {
@@ -419,4 +480,18 @@ export interface InventarioProducto {
 export interface Inventario {
   id?: string;
   productos: InventarioProducto[];
+}
+
+ export interface Proyectos {
+  id?: string;
+  nombre: string;
+  fecha: String;
+  empleados: string[];
+  materiales: string[];
+}
+
+export interface SolicitudMateriales {
+  id?: string;
+  nombre: string;
+  materiales: string[];
 }

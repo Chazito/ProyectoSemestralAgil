@@ -6,19 +6,28 @@
 
 <ion-content [fullscreen]="true">
   <ion-list>
+    <!-- Campo Nombre (no editable) -->
     <ion-item>
       <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Materiales</ion-label>
-      <ion-input type="text" required [(ngModel)]="materiales"></ion-input>
+      <ion-input type="text" [value]="nombre" readonly></ion-input>
     </ion-item>
   </ion-list>
 
-  <div>
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let producto of productosFiltrados" [value]="producto.id">
+      <ion-item slot="header">
+        <ion-label>{{ producto.nombre }}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="producto.seleccionado"></ion-checkbox>
+      </ion-item>
+      <div slot="content" style="padding: 1rem;">
+        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <div style="padding: 16px;">
     <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button color="primary" (click)="editarSolicitud()">Editar</ion-button>
+    <ion-button color="primary" (click)="editarSolicitud()">Guardar Cambios</ion-button>
   </div>
 </ion-content>
-

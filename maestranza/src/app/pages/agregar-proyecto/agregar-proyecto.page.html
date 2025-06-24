@@ -1,47 +1,125 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Creacion de Proyecto</ion-title>
+    <ion-title>Creación de Proyecto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
-    </ion-item>
+   <!-- SECCIÓN: Botones de Acción -->
+  <ion-card>
+    <ion-card-content>
+      <div style="display: flex; gap: 1rem; justify-content: space-between;">
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          color="medium" 
+          (click)="cancelar()">
+          <ion-icon name="close-outline" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+        <ion-button 
+          expand="block" 
+          color="primary" 
+          (click)="agregarProyecto()">
+          <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+          Crear Proyecto
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  
+  <!-- SECCIÓN: Información del Proyecto -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Información del Proyecto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Nombre del proyecto</ion-label>
+          <ion-input type="text" required [(ngModel)]="nombre"></ion-input>
+        </ion-item>
 
-    <ion-item>
-      <ion-label position="floating">Fecha</ion-label>
-      <ion-input type="date" required [(ngModel)]="fecha"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-input type="date" required [(ngModel)]="fecha"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-    <ion-item>
-      <ion-label position="floating">Empleados</ion-label>
-      <ion-select
-        required
-        multiple="true"
-        cancelText="Cerrar"
-        okText="Ok"
-        [(ngModel)]="empleados"
-      >
-        <ion-select-option>Gerente de proyecto</ion-select-option>
-        <ion-select-option>Comprador</ion-select-option>
-        <ion-select-option>Logística</ion-select-option>
-        <ion-select-option>Trabajador de planta</ion-select-option>
-        <ion-select-option>Gestor de inventario</ion-select-option>
-      </ion-select>
-    </ion-item>
+  <!-- SECCIÓN: Selección de Usuarios -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="people-outline"></ion-icon>
+        Seleccionar Usuarios
+      </ion-card-title>
+      <ion-card-subtitle>Usuarios seleccionados: {{ contarUsuariosSeleccionados() }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Buscador para Usuarios -->
+      <ion-searchbar 
+        placeholder="Buscar usuario..."
+        (ionInput)="filtrarUsuarios($event)">
+      </ion-searchbar>
 
-    <ion-item>
-      <ion-label position="floating">Materiales</ion-label>
-      <ion-input type="text" required [(ngModel)]="materiales"></ion-input>
-    </ion-item>
+      <!-- Acordeones para mostrar los usuarios -->
+<ion-list>
+  <ion-item *ngFor="let usuario of usuariosFiltrados">
+    <ion-avatar slot="start">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ usuario.nombre }}</h2>
+      <p>{{ usuario.email }}</p>
+    </ion-label>
+    <ion-checkbox
+      slot="end"
+      [(ngModel)]="usuario.seleccionado"
+      [name]="'usuario-' + usuario.id">
+    </ion-checkbox>
+  </ion-item>
+</ion-list>
+    </ion-card-content>
+  </ion-card>
+    
+  <!-- SECCIÓN: Selección de Productos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="cube-outline"></ion-icon>
+        Seleccionar Productos
+      </ion-card-title>
+      <ion-card-subtitle>Productos seleccionados: {{ contarProductosSeleccionados() }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Buscador para Productos -->
+      <ion-searchbar 
+        placeholder="Buscar producto..."
+        (ionInput)="filtrarProductos($event)">
+      </ion-searchbar>
 
-  </ion-list>
+      <ion-accordion-group>
+        <ion-accordion *ngFor="let producto of productosFiltrados" value="{{producto.id}}">
+          <ion-item slot="header">
+            <ion-avatar slot="start">
+              <ion-icon name="cube-outline"></ion-icon>
+            </ion-avatar>
+            <ion-label>{{ producto.nombre }}</ion-label>
+            <ion-checkbox 
+              slot="end" 
+              [(ngModel)]="producto.seleccionado">
+            </ion-checkbox>
+          </ion-item>
+          <div slot="content" style="padding: 1rem; background-color: var(--ion-color-light);">
+            <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-card-content>
+  </ion-card>
 
-  <div>
-    <ion-button color="medium" (click)="cancelar()">Cancelar</ion-button>
-    <ion-button color="primary" (click)="agregarProyecto()">Agregar</ion-button>
-  </div>
+ 
+
 </ion-content>

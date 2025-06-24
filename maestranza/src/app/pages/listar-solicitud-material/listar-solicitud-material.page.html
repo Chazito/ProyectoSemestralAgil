@@ -22,14 +22,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
+          <tr *ngFor="let solicitud of solicitudes">
+            <td>{{ solicitud.nombre }}</td>
+            <td>{{ solicitud.materiales.join(', ') }}</td>
             <td>
-              <ion-button fill="clear" size="small" color="primary" (click)="editar()">
+              <!--<ion-button fill="clear" size="small" color="primary" (click)="editar()">
                 <ion-icon name="create-outline" slot="icon-only"></ion-icon>
-              </ion-button>
-              <ion-button fill="clear" size="small" color="danger" (click)="confirmarEliminar()">
+              </ion-button>-->
+              <ion-button fill="clear" size="small" color="danger" (click)="confirmarEliminar(solicitud)">
                 <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
               </ion-button>
             </td>
@@ -39,4 +39,3 @@
     </ion-card-content>
   </ion-card>
 </ion-content>
-

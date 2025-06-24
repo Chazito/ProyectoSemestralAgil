@@ -11,36 +11,38 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
- <ion-card>
-  <ion-card-content>
-    <table class="proyectos-table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Fecha</th>
-          <th>Empleados</th>
-          <th>Materiales</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+  <ion-card>
+    <ion-card-content>
+      <table class="proyectos-table" style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Empleados</th>
+            <th>Materiales</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let proyecto of proyectos">
+            <td>{{ proyecto.nombre }}</td>
+            <td>{{ proyecto.fecha }}</td>
+            <td>{{ proyecto.empleados.join(', ') }}</td>
+            <td>{{ proyecto.materiales.join(', ') }}</td>
             <td>
-              <ion-button fill="clear" size="small" color="primary" (click)="editar()">
+              <!--<ion-button fill="clear" size="small" color="primary" (click)="editar(proyecto)">
                 <ion-icon name="create-outline" slot="icon-only"></ion-icon>
-              </ion-button>
-              <ion-button fill="clear" size="small" color="danger" (click)="confirmarEliminar()">
+              </ion-button>-->
+              <ion-button fill="clear" size="small" color="danger" (click)="confirmarEliminar(proyecto)">
                 <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
               </ion-button>
             </td>
+          </tr>
+          <tr *ngIf="proyectos.length === 0">
+            <td colspan="5" style="text-align:center;">No hay proyectos disponibles</td>
           </tr>
         </tbody>
       </table>
     </ion-card-content>
   </ion-card>
-
 </ion-content>
