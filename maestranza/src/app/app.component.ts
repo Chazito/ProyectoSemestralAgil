@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { addCircleOutline, cubeOutline, homeOutline, locationOutline, logOutOutline, peopleOutline, pricetagOutline, storefrontOutline, swapHorizontalOutline } from 'ionicons/icons';
+import { addCircleOutline, bagAddOutline, cubeOutline, homeOutline, locationOutline, logOutOutline, peopleOutline, pricetagOutline, rocketOutline, storefrontOutline, swapHorizontalOutline } from 'ionicons/icons';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -32,7 +32,9 @@ export class AppComponent implements OnInit {
       { title: 'Ubicaciones', url: '/ubicaciones', icon: 'location-outline' },
       { title: 'Productos', url: '/productos', icon: 'pricetag-outline' },
       { title: 'Movimientos', url: '/movimientos', icon: 'swap-horizontal-outline' },
-      { title: 'Agregar Movimiento', url: '/agregar-movimiento', icon: 'add-circle-outline' }
+      { title: 'Agregar Movimiento', url: '/agregar-movimiento', icon: 'add-circle-outline' },
+      { title: 'Proyectos', url: '/listar-proyecto', icon: 'rocket-outline' },
+      { title: 'Materiales', url: '/listar-solicitud-material', icon: 'bag-add-outline' }
     ],
     2: [ // comprador
       { title: 'Proveedores', url: '/proveedores', icon: 'people-outline' },
@@ -48,6 +50,15 @@ export class AppComponent implements OnInit {
       { title: 'Movimientos', url: '/movimientos', icon: 'swap-horizontal-outline' },
       { title: 'Agregar Movimiento', url: '/agregar-movimiento', icon: 'add-circle-outline' }
     ],
+    5:
+      [//Gerente proyecto
+        { title: 'Proyectos', url: '/listar-proyecto', icon: 'rocket-outline' },
+        { title: 'Materiales', url: '/listar-solicitud-material', icon: 'bag-add-outline' }
+      ],
+    6:
+      [//Trabajador planta
+        { title: 'Materiales', url: '/listar-solicitud-material', icon: 'bag-add-outline' }
+      ],
     // Agrega más roles según sea necesario
   };
 
@@ -58,7 +69,7 @@ export class AppComponent implements OnInit {
   }
 
   constructor(private router: Router, private userService: UserService) {
-    addIcons({ cubeOutline, logOutOutline, locationOutline, storefrontOutline, pricetagOutline, homeOutline, addCircleOutline, swapHorizontalOutline, peopleOutline });
+    addIcons({ cubeOutline, logOutOutline, locationOutline, storefrontOutline, pricetagOutline, homeOutline, addCircleOutline, swapHorizontalOutline, peopleOutline, rocketOutline, bagAddOutline });
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       this.user = JSON.parse(storedUser);

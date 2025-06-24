@@ -78,7 +78,7 @@ export class ListarProductosPage implements OnInit {
     try {
       await this.fireService.agregarProducto(producto);
       alert('Producto agregado con éxito');
-      this.router.navigate(['/vista-inventario']);
+      this.router.navigate(['/inventario']);
       this.limpiarFormulario();
     } catch (error) {
       console.error('Error al agregar producto:', error);

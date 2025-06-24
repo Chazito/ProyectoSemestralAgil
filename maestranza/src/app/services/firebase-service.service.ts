@@ -459,7 +459,7 @@ export interface Movimiento {
   codigo_barra: string;
   id_ubicacion: string;
   id_usuario: string;
-  fecha: Timestamp;
+  fecha: Date;
   cantidad: number;
   accion: string; //Salida | Entrada | Uso | Devolucion | Traslado
   comentario: string;
