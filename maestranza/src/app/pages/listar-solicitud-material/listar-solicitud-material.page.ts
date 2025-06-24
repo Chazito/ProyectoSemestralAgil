@@ -38,7 +38,7 @@ export class ListarSolicitudMaterialPage implements OnInit {
 
   editar() {
     console.log('Editar proyecto');
-    this.router.navigate(['/editar-proyecto']);
+    this.router.navigate(['/editar-solicitud-material']);
     // Aquí podrías redirigir a otra página o abrir un modal
   }
 

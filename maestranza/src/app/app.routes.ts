@@ -144,6 +144,10 @@ export const routes: Routes = [
   {
     path: 'listar-solicitud-material',
     loadComponent: () => import('./pages/listar-solicitud-material/listar-solicitud-material.page').then( m => m.ListarSolicitudMaterialPage)
+  },
+  {
+    path: 'editar-solicitud-material',
+    loadComponent: () => import('./pages/editar-solicitud-material/editar-solicitud-material.page').then( m => m.EditarSolicitudMaterialPage)
   }
 
 
