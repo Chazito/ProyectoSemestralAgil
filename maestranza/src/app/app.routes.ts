@@ -125,7 +125,31 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/listar-ubicaciones/listar-ubicaciones.page').then(m => m.ListarUbicacionesPage),
     canActivate: [AuthGuard],
     data: { roles: [0, 1] }
+  },  {
+    path: 'agregar-proyecto',
+    loadComponent: () => import('./pages/agregar-proyecto/agregar-proyecto.page').then( m => m.AgregarProyectoPage)
+  },
+  {
+    path: 'listar-proyecto',
+    loadComponent: () => import('./pages/listar-proyecto/listar-proyecto.page').then( m => m.ListarProyectoPage)
+  },
+  {
+    path: 'editar-proyecto',
+    loadComponent: () => import('./pages/editar-proyecto/editar-proyecto.page').then( m => m.EditarProyectoPage)
+  },
+  {
+    path: 'agregar-solicitud-material',
+    loadComponent: () => import('./pages/agregar-solicitud-material/agregar-solicitud-material.page').then( m => m.AgregarSolicitudMaterialPage)
+  },
+  {
+    path: 'listar-solicitud-material',
+    loadComponent: () => import('./pages/listar-solicitud-material/listar-solicitud-material.page').then( m => m.ListarSolicitudMaterialPage)
+  },
+  {
+    path: 'editar-solicitud-material',
+    loadComponent: () => import('./pages/editar-solicitud-material/editar-solicitud-material.page').then( m => m.EditarSolicitudMaterialPage)
   }
+
 
 
 
