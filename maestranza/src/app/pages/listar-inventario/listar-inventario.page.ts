@@ -1,71 +1,78 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonGrid, IonRow, IonCol, IonButton, IonSelectOption, IonText, IonCard, IonCardContent } from '@ionic/angular/standalone';
-import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
+import {
+  IonHeader, IonToolbar, IonTitle, IonContent, IonItem, IonLabel,
+  IonSelect, IonSelectOption, IonCard, IonCardContent, IonList,
+  IonInput, IonButton, IonIcon
+} from '@ionic/angular/standalone';
+import { Bodega, FirebaseServiceService, Producto } from 'src/app/services/firebase-service.service';
+import { collection } from '@angular/fire/firestore';
+import { getDocs } from 'firebase/firestore';
+import { addIcons } from 'ionicons';
+import { saveOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-listar-inventario',
   templateUrl: './listar-inventario.page.html',
   styleUrls: ['./listar-inventario.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonCard, IonText, IonButton, IonCol, IonRow, IonGrid, IonLabel, IonItem, IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule, IonSelectOption]
+  imports: [IonIcon,
+    CommonModule, FormsModule,
+    IonHeader, IonToolbar, IonTitle, IonContent,
+    IonItem, IonLabel, IonSelect, IonSelectOption,
+    IonCard, IonCardContent, IonInput, IonButton
+  ]
 })
 export class ListarInventarioPage implements OnInit {
 
-  bodegas: any[] = [];
+  bodegas: Bodega[] = [];
   bodegaSeleccionada: string = '';
-  inventario: any[] = [];
+  productosInventario: any[] = [];
+  todosLosProductos: Producto[] = [];
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private fireService: FirebaseServiceService) {
+    addIcons({ saveOutline });
+  }
 
   ngOnInit() {
-    this.firebaseService.getBodegas().subscribe(bodegas => {
-      this.bodegas = bodegas;
-    });
+    this.fireService.getBodegas().subscribe(b => this.bodegas = b);
+    this.fireService.getProductos().subscribe(p => this.todosLosProductos = p);
   }
 
-  cargarInventario() {
-    if (!this.bodegaSeleccionada) {
-      this.inventario = [];
-      return;
+  async cargarInventario() {
+    if (!this.bodegaSeleccionada) return;
+
+    this.productosInventario = [];
+
+    const productosRef = collection(this.fireService.firestore,
+      `inventario/${this.bodegaSeleccionada}/productos`);
+    const productosSnap = await getDocs(productosRef);
+
+    for (const productoDoc of productosSnap.docs) {
+      const codigo_barra = productoDoc.id;
+      const data = productoDoc.data();
+      const total = data['total'] || 0;
+      const stock_min = data['stock_min'] || 0;
+
+      const producto = this.todosLosProductos.find(p => p.codigo_barra === codigo_barra);
+      this.productosInventario.push({
+        codigo_barra,
+        nombre: producto?.nombre || 'Desconocido',
+        total,
+        stock_min
+      });
     }
-
-    const path = `inventario/${this.bodegaSeleccionada}/productos`;
-    const productosRef = this.firebaseService.getProductos();
-
-    productosRef.subscribe(productos => {
-      const promises = productos.map(async (producto) => {
-        const docSnap = await this.firebaseService.getProductoById(producto.id).toPromise();
-        const invDoc = await this.firebaseService.obtenerDocumento(`inventario/${this.bodegaSeleccionada}/productos/${producto.codigo_barra}`);
-
-        if (invDoc && invDoc.exists()) {
-          const data = invDoc.data();
-          return {
-            ...producto,
-            total: data['total'] || 0,
-            stock_min: data['stock_min'] || 0
-          };
-        }
-
-        return null;
-      });
-
-      Promise.all(promises).then(result => {
-        this.inventario = result.filter(p => p !== null);
-      });
-    });
   }
 
-  guardarStockMinimo(producto: any) {
-    const path = `inventario/${this.bodegaSeleccionada}/productos/${producto.codigo_barra}`;
-    this.firebaseService.updateDoc(path, { stock_min: producto.stock_min })
-      .then(() => {
-        this.firebaseService.presentAlert("Éxito", "Stock mínimo actualizado");
-      })
-      .catch(() => {
-        this.firebaseService.presentAlert("Error", "No se pudo actualizar");
-      });
+  async guardarStockMinimo(p: any) {
+    const path = `inventario/${this.bodegaSeleccionada}/productos/${p.codigo_barra}`;
+    try {
+      await this.fireService.updateDoc(path, { stock_min: p.stock_min });
+      await this.fireService.presentAlert('Éxito', `Stock mínimo actualizado para ${p.nombre}`);
+    } catch (error) {
+      console.error(error);
+      await this.fireService.presentAlert('Error', 'No se pudo actualizar el stock mínimo');
+    }
   }
-
 }

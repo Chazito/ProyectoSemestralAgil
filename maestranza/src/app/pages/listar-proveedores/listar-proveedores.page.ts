@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonIcon, IonButtons,IonButton, IonCardContent } from '@ionic/angular/standalone';
 import { AlertController} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { createOutline, trashOutline } from 'ionicons/icons';
+import { createOutline, trashOutline, addCircleOutline } from 'ionicons/icons';
+import { FirebaseServiceService, Proveedor } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-listar-proveedores',
@@ -16,11 +17,15 @@ import { createOutline, trashOutline } from 'ionicons/icons';
 })
 export class ListarProveedoresPage implements OnInit {
 
+  proveedores : Proveedor[] = [];
+  private firebase : FirebaseServiceService = inject(FirebaseServiceService);
+
   constructor(private router : Router, private alertController : AlertController) { 
-    addIcons({ createOutline, trashOutline });
+    addIcons({addCircleOutline,createOutline,trashOutline});
   }
 
   ngOnInit() {
+    this.firebase.getProveedores().subscribe( b => this.proveedores = b);
   }
 
   editar() {

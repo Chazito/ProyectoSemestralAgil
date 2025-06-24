@@ -28,7 +28,7 @@ export class EditarProveedoresPage implements OnInit {
 
   cancelar() {
     this.limpiarFormulario();
-    this.router.navigate(['/listar-proveedores']);
+    this.router.navigate(['/proveedores']);
   }
 
   limpiarFormulario() {
@@ -95,6 +95,7 @@ export class EditarProveedoresPage implements OnInit {
 
   alert('Proveedor editado correctamente');
   this.limpiarFormulario();
+  //TODO
   }
 
 

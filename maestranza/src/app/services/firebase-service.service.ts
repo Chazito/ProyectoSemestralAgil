@@ -13,7 +13,7 @@ export class FirebaseServiceService {
   private collectionBodegas = "bodegas";
   private collectionProveedores = "proveedores";
 
-  constructor(private firestore: Firestore, private alertController: AlertController) { }
+  constructor(public firestore: Firestore, private alertController: AlertController) { }
 
   async presentAlert(titulo: string, msj: string) {
     const alert = await this.alertController.create({

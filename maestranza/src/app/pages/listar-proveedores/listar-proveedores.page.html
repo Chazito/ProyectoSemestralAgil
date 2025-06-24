@@ -25,12 +25,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let proveedor of proveedores">
+            <td>{{proveedor.rut}}</td>
+            <td>{{proveedor.nombre}}</td>
+            <td>{{proveedor.correo}}</td>
+            <td>{{proveedor.telefono}}</td>
+            <td>{{proveedor.direccion}}</td>
             <td>
               <ion-button fill="clear" size="small" color="primary" (click)="editar()">
                 <ion-icon name="create-outline" slot="icon-only"></ion-icon>

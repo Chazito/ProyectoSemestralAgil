@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonLabel, IonItem, IonList, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { Router } from '@angular/router';
+import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
 
 @Component({
   selector: 'app-agregar-proveedores',
@@ -13,6 +14,8 @@ import { Router } from '@angular/router';
     IonSelectOption, CommonModule, FormsModule]
 })
 export class AgregarProveedoresPage implements OnInit {
+
+  private firestore = inject(FirebaseServiceService);
 
   rut: string = '';
   nombre: string = '';
@@ -40,7 +43,7 @@ export class AgregarProveedoresPage implements OnInit {
     this.terminosPago = '';
   }
 
-  agregarProveedor() {
+  async agregarProveedor() {
     // Validación de campos vacíos
     if (!this.rut.trim() || !this.nombre.trim() || !this.correo.trim() ||
       !this.telefono.trim() || !this.direccion.trim() || !this.terminosPago.trim()) {
@@ -83,15 +86,18 @@ export class AgregarProveedoresPage implements OnInit {
       return;
     }
 
-    // Si pasa todas las validaciones
-    console.log('Proveedor agregado:', {
+    const proveedor = {
       rut: this.rut,
       nombre: this.nombre,
       correo: this.correo,
-      telefono: this.telefono,
+      telefono: Number(this.telefono),
       direccion: this.direccion,
-      terminosPago: this.terminosPago
-    });
+      terminos_pago: this.terminosPago
+    };
+
+    await this.firestore.agregarProveedor(proveedor)
+    // Si pasa todas las validaciones
+    console.log('Proveedor agregado:', proveedor);
 
     alert('Proveedor agregado correctamente');
     this.limpiarFormulario();
