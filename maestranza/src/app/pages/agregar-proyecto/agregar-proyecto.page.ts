@@ -26,7 +26,7 @@ export class AgregarProyectoPage implements OnInit {
 
   cancelar() {
     this.limpiarFormulario();
-    this.router.navigate(['/agregar-proyecto']); // cambia según donde quieras volver
+    this.router.navigate(['/listar-proyecto']); // cambia según donde quieras volver
   }
 
   limpiarFormulario() {

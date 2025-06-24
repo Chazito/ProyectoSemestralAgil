@@ -26,7 +26,7 @@ export class EditarProyectoPage implements OnInit {
 
   cancelar() {
     this.limpiarFormulario();
-    this.router.navigate(['/proyecto']); // Ruta a donde quieras volver
+    this.router.navigate(['/listar-proyecto']); // Ruta a donde quieras volver
   }
 
   limpiarFormulario() {
@@ -80,7 +80,7 @@ export class EditarProyectoPage implements OnInit {
 
     alert('Proyecto editado correctamente');
     this.limpiarFormulario();
-    this.router.navigate(['/proyectos']); // Ajusta según tu flujo
+    this.router.navigate(['/listar-proyecto']); // Ajusta según tu flujo
   }
 }
 
